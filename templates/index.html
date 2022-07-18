@@ -1,0 +1,23 @@
+<h1>МОЙ СОК</h1>
+<h3>прекрасен</h3>
+
+<p>конечно</p>
+
+<p>Меня зовут {{first_name}} между прочим</p>
+
+<p>{{stuff|title}}</p>
+
+<p>У меня есть:</p>
+{% for topi in flavors %}
+	{% if topi == "Кровь" %}
+		{{topi|reverse}} - Хороший выбор<br/>
+	{% else  %}
+		Может "КрОвЬ"?<br/>
+	{% endif %}
+	
+	
+{% endfor %}
+
+<br/><br/>
+
+{{flavors.5}}
