@@ -1,0 +1,1 @@
+document.getElementById('demo').innerHTML = "Текст был изменен с помощью джаваскрипт";
