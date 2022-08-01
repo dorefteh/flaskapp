@@ -6,16 +6,42 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        {% if current_user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="{{url_for('user', name = 'Окорок')}}">Имя</a>
+          <a class="nav-link" href="{{url_for('dashboard')}}">Профиль</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{url_for('add_user')}}">Добавить пользователя</a>
+        <a class="nav-link" href="{{url_for('add_post')}}">Добавить пост</a>
         </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{{url_for('posts')}}">Блог</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('logout')}}">Выйти</a>
+        </li>
+        </li>
+        {% if current_user.id == 16 %}
+        <li class="nav-item">
+        <a class="nav-link" href="{{url_for('admin')}}">Страница админа</a>
+        </li>
+        {% endif %}
+        {% else %}
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('add_user')}}">Регистрация</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{{url_for('login')}}">Авторизация</a>
+        </li>
+
+        {% endif %}
+
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-secondary" type="submit">Search</button>
+      <form method="POST" action="{{url_for('search')}}" class="d-flex" role="search">
+        {{ form.hidden_tag() }}
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched">
+        <button class="btn btn-outline-secondary" type="submit">Искать</button>
       </form>
     </div>
   </div>

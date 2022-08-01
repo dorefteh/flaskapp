@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+	{{message}}
+	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	
+{% endfor %}
+
+{% if email %}
+	<h1>Введен email: {{email}}</h1>
+	<h1>Введен пароль: {{password}}</h1>
+	<br/>
+	<h2>Информация была найдена</h2>
+	Имя: {{pw_to_check.name}}<br/>
+	Почта: {{pw_to_check.email}}<br/>
+	Пароль: {{pw_to_check.password_hash}}<br/>
+	<br/>
+	Совпадение паролей: {{passed}}
+
+{% else %}
+	<h1>Введите почту и пароль </h1>
+	<br/>
+	<form method="POST">
+		{{ form.hidden_tag() }}
+
+		{{ form.email.label(class="form-label") }}
+
+		{{ form.email(class="form-control") }}
+		<br/>
+
+		{{ form.hidden_tag() }}
+
+		{{ form.password_hash.label(class="form-label") }}
+
+		{{ form.password_hash(class="form-control") }}
+		<br/>
+
+		{{ form.submit(class="btn btn-secondary") }}
+
+	</form>
+{% endif %}
+{% endblock %}

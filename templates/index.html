@@ -12,19 +12,12 @@
 
 	<p>{{stuff|title}}</p>
 
-	<p>У меня есть:</p>
+	<p>Вкусы на выбор:</p>
 	{% for topi in flavors %}
-		{% if topi == "Кровь" %}
-			{{topi|reverse}} - Хороший выбор<br/>
-		{% else  %}
-			Может "КрОвЬ"?<br/>
-		{% endif %}
 		
-		
+		{{flavors|random}}<br/>
+			
 	{% endfor %}
 
-	<br/><br/>
-
-	{{flavors.5}}
 
 {% endblock %}

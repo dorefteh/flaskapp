@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+	{{message}}
+	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	
+{% endfor %}
+
+	<h2>С возвращением!</h2>
+	<br/>
+
+	<div class="card">
+  <div class="card-header">
+    {{current_user.username}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Ваш профиль</h5>
+    <p class="card-text">
+    <strong>Ник:</strong>{{current_user.username}}<br/>
+	<strong>Имя:</strong>{{current_user.name}}<br/>
+	<strong>Id:</strong>{{current_user.id}}<br/>
+	<strong>Почта:</strong>{{current_user.email}}<br/>
+	<strong>Любимый цвет:</strong>{{current_user.favorite_color}}<br/>
+	<strong>Время регистрации:</strong>{{current_user.date_added}}<br/>
+	</p>
+<a href ="{{url_for('update', id=current_user.id) }}" class="btn btn-outline-dark btn-sm">Отрекдактировать</a>
+
+<a href="{{url_for('logout')}}" class="btn btn-dark btn-sm">Выйти</a>
+
+<a href="{{url_for('delete', id=current_user.id)}}" class="btn btn-danger">Удалить</a>
+  </div>
+<br/>
+	<div class="card">
+  <div class="card-header">
+    Изменить профиль
+  </div>
+  <div class="card-body">	
+  <form action="/dashboard"method="POST">
+    {{ form.hidden_tag() }}
+
+		{{ form.name.label(class="form-label") }}
+
+		{{ form.name(class="form-control", value=name_to_update.name) }}
+		<br/>
+		{{ form.username.label(class="form-label") }}
+
+		{{ form.username(class="form-control", value=name_to_update.name) }}
+		<br/>
+
+		{{ form.email.label(class="form-label") }}
+
+		{{ form.email(class="form-control", value=name_to_update.email) }}		
+		<br/>
+		{{ form.favorite_color.label(class="form-label") }}
+
+		{{ form.favorite_color(class="form-control", value=name_to_update.favorite_color) }}
+		<br/>
+		{{ form.submit(class="btn btn-secondary") }}
+	</h5>
+    <p class="card-text">
+ </div>
+
+
+</div>
+</div>
+	<br/><br/>
+	
+
+{% endblock %}

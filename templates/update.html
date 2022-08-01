@@ -10,20 +10,10 @@
 	
 {% endfor %}
 
-{% if name %}
-	<h1>Изменение данных пользователя</h1>
-	<br/><br/>
-<table class="table table-bordered table-striped table-hover">
-{% for  our_user in our_users %}
-	<tr>
-	<td>{{our_user.id}}.{{our_user.name}} - {{our_user.email}} - {{our_user.favorite_color}}</td>
-	</tr>
-{% endfor %}
-</table>
-
-{% else %}
+{% if id == current_user.id%}
 	<h1>Изменение данных {{name_to_update.name}}</h1>
-	<br/>
+	<br/><br/>
+
 	<div class="shadow p-3 mb-5 bg-body rounded">
 	<form action="/update/{{name_to_update.id}}"method="POST">
 		{{ form.hidden_tag() }}
@@ -31,6 +21,10 @@
 		{{ form.name.label(class="form-label") }}
 
 		{{ form.name(class="form-control", value=name_to_update.name) }}
+		<br/>
+		{{ form.username.label(class="form-label") }}
+
+		{{ form.username(class="form-control", value=name_to_update.name) }}
 		<br/>
 
 		{{ form.email.label(class="form-label") }}
@@ -47,9 +41,17 @@
 
 	</form>
 	</div>
-
 <br/><br/>
+{% else %}
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+	Авторизованные пользователя могут менять только собственные данные.
+	<button type="button" class="btn-close btn-warning" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	
 
 {% endif %}
+
+
+
 
 {% endblock %}
